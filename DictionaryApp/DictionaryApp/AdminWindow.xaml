@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DictionaryApp"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
+        Title="AdminWindow" Height="216" Width="318">
+
+    <!-- Define the KeyBinding for Alt + L to close the AdminWindow -->
+
     <Grid Margin="10">
 
         <!-- Staff ID Label and TextBox -->
@@ -26,4 +29,7 @@
             <StatusBarItem x:Name="statusMessage" Content="Ready"/>
         </StatusBar>
     </Grid>
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static local:AdminWindow.CloseAdminWindowCommand}" Key="L" Modifiers="Alt"/>
+    </Window.InputBindings>
 </Window>

@@ -23,6 +23,7 @@ namespace DictionaryApp
         private int staffId;
         private bool isCreateMode;
         public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
+        public static RoutedCommand CloseAdminWindowCommand = new RoutedCommand();
         public AdminWindow(int staffId, string staffName)
         {
             InitializeComponent(); 
@@ -30,7 +31,12 @@ namespace DictionaryApp
             this.isCreateMode = true; // Update/Delete mode
             txtAdminStaffID.Text = staffId.ToString();
             txtAdminStaffName.Text = staffName;
-        }// Constructor for Create Mode
+            CommandBindings.Add(new CommandBinding(CloseAdminWindowCommand, CloseAdminWindow));
+
+
+        }
+
+        // Constructor for Create Mode
         public AdminWindow(bool isCreateMode)
         {
             InitializeComponent();
@@ -186,6 +192,12 @@ namespace DictionaryApp
                 // Show an error if the Staff ID is invalid
                 MessageBox.Show("Invalid Staff ID entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        // Method to close the AdminWindow
+        private void CloseAdminWindow(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
