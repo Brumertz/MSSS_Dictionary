@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 
 namespace DictionaryApp
@@ -29,7 +30,7 @@ namespace DictionaryApp
         public static RoutedUICommand OpenAdminCommand = new RoutedUICommand("Open Admin", "OpenAdminCommand", typeof(MainWindow));
         public static RoutedCommand ClearStaffIDFilterCommand = new RoutedCommand();
         public static RoutedCommand ClearStaffNameFilterCommand = new RoutedCommand();
-        
+        public static readonly RoutedUICommand SaveDataCommand = new RoutedUICommand("Save Data", "SaveDataCommand", typeof(MainWindow));
         public MainWindow()
         {
             InitializeComponent();
@@ -38,9 +39,13 @@ namespace DictionaryApp
             CommandBindings.Add(new CommandBinding(ClearStaffNameFilterCommand, ClearAndFocusStaffNameFilter));
             CommandBindings.Add(new CommandBinding(ClearStaffIDFilterCommand, ClearAndFocusStaffIDFilter));
             CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminGui));
+            CommandBindings.Add(new CommandBinding(SaveDataCommand, SaveData_Click)); // Bind SaveDataCommand to SaveData_Click
+
         }
         private void LoadDataFromCsv(string filePath)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             try
             {
@@ -68,6 +73,8 @@ namespace DictionaryApp
             {
                 MessageBox.Show($"Error loading data: {ex.Message}");
             }
+            stopwatch.Stop();
+            Trace.WriteLine($"LoadDataFromCsv execution time: {stopwatch.ElapsedMilliseconds} ms");
         }
         // Method to display data in a read-only list box
         private void DisplayData()
@@ -166,6 +173,8 @@ namespace DictionaryApp
         }
         private void SaveData_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             // Create a SaveFileDialog to allow the user to choose where to save the data
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
@@ -192,6 +201,8 @@ namespace DictionaryApp
                 {
                     MessageBox.Show($"Error saving data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                stopwatch.Stop();
+                Trace.WriteLine($"SaveData execution time: {stopwatch.ElapsedMilliseconds} ms");
             }
         }
         public void RefreshListBox()

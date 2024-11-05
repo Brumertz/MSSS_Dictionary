@@ -25,13 +25,27 @@
 
         <TextBox x:Name="txtSelectedStaffID" HorizontalAlignment="Left" Margin="538,125,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData" IsEnabled="False"/>
         <Label Content="Staff ID " HorizontalAlignment="Left" Margin="538,96,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSaveData" Content="Save Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="638,349,0,0" Click="SaveData_Click"/>
+        <Button x:Name="btnSaveData" Content="Save Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="572,320,0,0" Click="SaveData_Click"/>
+
+        <!-- Shortcuts label displaying the keyboard shortcuts -->
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="555,0,0,149" TextWrapping="Wrap">
+            <Run Text="Shortcuts:" />
+            <LineBreak />
+            <Run Text="Open Admin GUI: Alt + A" />
+            <LineBreak />
+            <Run Text="Clear Staff Name Filter: Ctrl + N" />
+            <LineBreak />
+            <Run Text="Clear Staff ID Filter: Ctrl + I" />
+            <LineBreak />
+            <Run Text="Save Data: Ctrl + S" />
+        </TextBlock>
     </Grid>
     <!-- Define the KeyBindings for custom commands -->
     <Window.InputBindings>
         <KeyBinding Command="{x:Static local:MainWindow.ClearStaffNameFilterCommand}" Key="N" Modifiers="Control"/>
         <KeyBinding Command="{x:Static local:MainWindow.ClearStaffIDFilterCommand}" Key="I" Modifiers="Control"/>
         <KeyBinding Command="{x:Static local:MainWindow.OpenAdminCommand}" Key="A" Modifiers="Alt"/>
+        <KeyBinding Command="{x:Static local:MainWindow.SaveDataCommand}" Key="S" Modifiers="Control"/>
 
     </Window.InputBindings>
 </Window>

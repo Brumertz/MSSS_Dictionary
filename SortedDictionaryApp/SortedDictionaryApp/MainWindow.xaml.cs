@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace SortedDictionaryApp
         public static readonly RoutedUICommand OpenAdminCommand = new RoutedUICommand("Open Admin", "OpenAdminCommand", typeof(MainWindow));
         public static readonly RoutedCommand ClearStaffIDFilterCommand = new RoutedCommand();
         public static readonly RoutedCommand ClearStaffNameFilterCommand = new RoutedCommand();
+        public static readonly RoutedUICommand SaveDataCommand = new RoutedUICommand("Save Data", "SaveDataCommand", typeof(MainWindow));
         public MainWindow()
         {
             InitializeComponent();
@@ -36,10 +38,13 @@ namespace SortedDictionaryApp
             CommandBindings.Add(new CommandBinding(ClearStaffNameFilterCommand, ClearAndFocusStaffNameFilter));
             CommandBindings.Add(new CommandBinding(ClearStaffIDFilterCommand, ClearAndFocusStaffIDFilter));
             CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminGui));
+            CommandBindings.Add(new CommandBinding(SaveDataCommand, SaveData_Click)); // Bind SaveDataCommand to SaveData_Click
+
         }
         private void LoadDataFromCsv(string filePath)
         {
-
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             try
             {
                 using (var reader = new StreamReader(filePath))
@@ -66,6 +71,8 @@ namespace SortedDictionaryApp
             {
                 MessageBox.Show($"Error loading data: {ex.Message}");
             }
+            stopwatch.Stop();
+            Trace.WriteLine($"LoadDataFromCsv execution time: {stopwatch.ElapsedMilliseconds} ms");
         }
         // Method to display data in a read-only list box
         private void DisplayData()
@@ -164,6 +171,8 @@ namespace SortedDictionaryApp
         }
         private void SaveData_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             // Create a SaveFileDialog to allow the user to choose where to save the data
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
@@ -190,6 +199,8 @@ namespace SortedDictionaryApp
                 {
                     MessageBox.Show($"Error saving data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                stopwatch.Stop();
+                Trace.WriteLine($"SaveData execution time: {stopwatch.ElapsedMilliseconds} ms");
             }
         }
         public void RefreshListBox()
