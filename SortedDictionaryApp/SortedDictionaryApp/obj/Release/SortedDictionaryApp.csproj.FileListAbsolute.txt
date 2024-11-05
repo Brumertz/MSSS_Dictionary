@@ -1,0 +1,17 @@
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\bin\Release\SortedDictionaryApp.exe.config
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\bin\Release\SortedDictionaryApp.exe
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\bin\Release\SortedDictionaryApp.pdb
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.csproj.AssemblyReference.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\AdminWindow.g.cs
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\MainWindow.g.cs
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\App.g.cs
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp_MarkupCompile.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp_MarkupCompile.lref
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\AdminWindow.baml
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\MainWindow.baml
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.g.resources
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.Properties.Resources.resources
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.csproj.GenerateResource.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.csproj.CoreCompileInputs.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.exe
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Release\SortedDictionaryApp.pdb
