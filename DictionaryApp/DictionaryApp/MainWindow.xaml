@@ -1,0 +1,34 @@
+﻿<Window x:Class="DictionaryApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DictionaryApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,3,0,-3">
+        <!-- ListBox for displaying all records -->
+        <ListBox x:Name="listBoxAllItems" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="184" IsHitTestVisible="False" Margin="49,169,0,0"/>
+
+        <!-- Filter controls -->
+        <TextBox x:Name="txtStaffNameFilter" HorizontalAlignment="Left" Margin="41,65,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
+        <Label Content="Staff Name Filter:" HorizontalAlignment="Left" Margin="41,23,0,0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="txtStaffIDFilter" HorizontalAlignment="Left" Margin="41,125,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
+        <Label Content="Staff ID Filter:" HorizontalAlignment="Left" Margin="41,88,0,0" VerticalAlignment="Top"/>
+
+        <!-- ListBox for displaying filtered results -->
+        <ListBox x:Name="listBoxFilteredResults" HorizontalAlignment="Left" Height="328" Margin="279,41,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="listBoxFilteredResults_SelectionChanged" />
+
+        <TextBox x:Name="txtSelectedStaffName" HorizontalAlignment="Left" Margin="538,65,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
+        <Label Content="Staff Name" HorizontalAlignment="Left" Margin="538,31,0,0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="txtSelectedStaffID" HorizontalAlignment="Left" Margin="538,125,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
+        <Label Content="Staff ID " HorizontalAlignment="Left" Margin="538,96,0,0" VerticalAlignment="Top"/>
+    </Grid>
+    <!-- Define the KeyBindings for custom commands -->
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static local:MainWindow.ClearStaffNameFilterCommand}" Key="N" Modifiers="Control"/>
+        <KeyBinding Command="{x:Static local:MainWindow.ClearStaffIDFilterCommand}" Key="I" Modifiers="Control"/>
+    </Window.InputBindings>
+</Window>
