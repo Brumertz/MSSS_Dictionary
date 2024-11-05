@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,3,0,-3">
         <!-- ListBox for displaying all records -->
-        <ListBox x:Name="listBoxAllItems" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="184" IsHitTestVisible="False" Margin="49,169,0,0"/>
+        <ListBox x:Name="listBoxAllItems" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="184" IsHitTestVisible="False" Margin="49,169,0,0" IsEnabled="False"/>
 
         <!-- Filter controls -->
         <TextBox x:Name="txtStaffNameFilter" HorizontalAlignment="Left" Margin="41,65,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
@@ -20,11 +20,12 @@
         <!-- ListBox for displaying filtered results -->
         <ListBox x:Name="listBoxFilteredResults" HorizontalAlignment="Left" Height="328" Margin="279,41,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="listBoxFilteredResults_SelectionChanged" />
 
-        <TextBox x:Name="txtSelectedStaffName" HorizontalAlignment="Left" Margin="538,65,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
+        <TextBox x:Name="txtSelectedStaffName" HorizontalAlignment="Left" Margin="538,65,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData" IsEnabled="False"/>
         <Label Content="Staff Name" HorizontalAlignment="Left" Margin="538,31,0,0" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="txtSelectedStaffID" HorizontalAlignment="Left" Margin="538,125,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData"/>
+        <TextBox x:Name="txtSelectedStaffID" HorizontalAlignment="Left" Margin="538,125,0,0" VerticalAlignment="Top" Width="200" KeyUp="FilterData" IsEnabled="False"/>
         <Label Content="Staff ID " HorizontalAlignment="Left" Margin="538,96,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSaveData" Content="Save Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="638,349,0,0" Click="SaveData_Click"/>
     </Grid>
     <!-- Define the KeyBindings for custom commands -->
     <Window.InputBindings>

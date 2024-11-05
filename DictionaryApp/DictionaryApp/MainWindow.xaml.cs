@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using Microsoft.Win32;
 
 
 namespace DictionaryApp
@@ -120,6 +121,7 @@ namespace DictionaryApp
         }// Method to open the Admin GUI with Alt + A
         private void OpenAdminGui(object sender, ExecutedRoutedEventArgs e)
         {
+            // Check if an item is selected in the list
             if (listBoxFilteredResults.SelectedItem != null)
             {
                 // Retrieve the selected Staff ID and Name from listBoxFilteredResults
@@ -130,10 +132,10 @@ namespace DictionaryApp
                 {
                     string staffName = parts[1].Trim();
 
-                    // Check if we need to open in "Create Mode" for new user
+                    // Check if we need to open in "Create Mode" specifically for Staff ID 77 with empty name
                     if (staffId == 77 && string.IsNullOrEmpty(staffName))
                     {
-                        // Open AdminWindow in Create Mode (e.g., pass special parameter or set a flag)
+                        // Open AdminWindow in Create Mode
                         AdminWindow adminWindow = new AdminWindow(true); // Passing true for "Create Mode"
                         adminWindow.ShowDialog();
                     }
@@ -147,8 +149,49 @@ namespace DictionaryApp
             }
             else
             {
-                MessageBox.Show("Please select a record to edit or leave Staff ID as 77 and Staff Name empty to create a new entry.",
-                    "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                // New logic: Check for "Create Mode" criteria when no item is selected
+                if (txtSelectedStaffID.Text == "77" && string.IsNullOrEmpty(txtSelectedStaffName.Text))
+                {
+                    // Open AdminWindow in Create Mode if Staff ID is 77 and Name is empty
+                    AdminWindow adminWindow = new AdminWindow(true); // Passing true for "Create Mode"
+                    adminWindow.ShowDialog();
+                }
+                else
+                {
+                    // Prompt user to select a record or enter 77 as Staff ID with an empty Staff Name
+                    MessageBox.Show("Please select a record to edit, or set Staff ID to 77 and leave Staff Name empty to create a new entry.",
+                        "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+        private void SaveData_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a SaveFileDialog to allow the user to choose where to save the data
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
+            saveFileDialog.Title = "Save Staff Data";
+            saveFileDialog.FileName = "MalinStaffNamesV3.csv"; // Default file name
+
+            // Show the dialog and get the selected file path
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                try
+                {
+                    using (StreamWriter writer = new StreamWriter(filePath))
+                    {
+                        foreach (var entry in MasterFile)
+                        {
+                            writer.WriteLine($"{entry.Key},{entry.Value}");
+                        }
+                    }
+                    MessageBox.Show("Data saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error saving data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

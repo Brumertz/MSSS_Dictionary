@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,12 @@ namespace DictionaryApp
     {
         private int staffId;
         private bool isCreateMode;
+        public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
         public AdminWindow(int staffId, string staffName)
         {
             InitializeComponent(); 
             this.staffId = staffId;
-            this.isCreateMode = false; // Update/Delete mode
+            this.isCreateMode = true; // Update/Delete mode
             txtAdminStaffID.Text = staffId.ToString();
             txtAdminStaffName.Text = staffName;
         }// Constructor for Create Mode
@@ -49,98 +51,118 @@ namespace DictionaryApp
 
             return newId;
         }
+
+        // Create a Staff Method
         private void CreateStaff(object sender, RoutedEventArgs e)
         {
-            // Check if we are in Create Mode
             if (!isCreateMode)
             {
                 statusMessage.Content = "Invalid operation: Not in Create Mode.";
                 return;
             }
 
-            // Get staff name from the text box
-            string staffName = txtAdminStaffName.Text.Trim();
+            // Validate that a valid Staff ID has been entered
+            if (!int.TryParse(txtAdminStaffID.Text, out int newStaffId) || !txtAdminStaffID.Text.StartsWith("77"))
+            {
+                statusMessage.Content = "Staff ID must be numeric and start with '77'.";
+                return;
+            }
 
-            // Validate that a name has been entered
+            // Check if the ID is unique
+            if (MainWindow.MasterFile.ContainsKey(newStaffId))
+            {
+                statusMessage.Content = "Error: Staff ID already exists. Please enter a unique ID.";
+                return;
+            }
+
+            // Validate that a name has been provided
+            string staffName = txtAdminStaffName.Text.Trim();
             if (string.IsNullOrEmpty(staffName))
             {
                 statusMessage.Content = "Please enter a valid Staff Name.";
                 return;
             }
 
-            // Generate a new unique Staff ID
-            int newStaffId = GenerateNewStaffID();
-
-            // Add the new staff member to MasterFile in MainWindow
-            if (MainWindow.MasterFile.ContainsKey(newStaffId))
-            {
-                statusMessage.Content = "Error: Staff ID already exists.";
-                return;
-            }
-
+            // Add the new staff member to MasterFile
             MainWindow.MasterFile[newStaffId] = staffName;
+
+            
+
+            // Confirm success and close the AdminWindow
             statusMessage.Content = "Staff created successfully.";
+            MessageBox.Show("New staff member added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close(); // Close the window after successful creation
         }
-        private void UpdateStaff(object sender, RoutedEventArgs e)
+
+        // Delete User Method
+        private void DeleteUser(int staffId)
         {
-            // Ensure we are not in Create Mode, as updates should only occur in Update/Delete Mode
-            if (isCreateMode)
-            {
-                statusMessage.Content = "Invalid operation: Not in Update Mode.";
-                return;
-            }
-
-            // Get the updated staff name
-            string updatedName = txtAdminStaffName.Text.Trim();
-
-            // Validate that a name has been provided
-            if (string.IsNullOrEmpty(updatedName))
-            {
-                statusMessage.Content = "Please enter a valid Staff Name.";
-                return;
-            }
-
-            // Check if the Staff ID exists in MasterFile
+            // Check if the user exists in MasterFile
             if (MainWindow.MasterFile.ContainsKey(staffId))
             {
-                MainWindow.MasterFile[staffId] = updatedName; // Update the name
-                statusMessage.Content = "Staff updated successfully.";
+                // Remove the user from MasterFile (in-memory only)
+                MainWindow.MasterFile.Remove(staffId);
+
+                // Display a success message
+                MessageBox.Show("User deleted successfully (in-memory only).", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Optionally, clear the text fields after deletion
+                txtAdminStaffID.Clear();
+                txtAdminStaffName.Clear();
             }
             else
             {
-                statusMessage.Content = "Error: Staff ID not found.";
+                MessageBox.Show("Error: Staff ID not found in MasterFile.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void DeleteStaff(object sender, RoutedEventArgs e)
+
+        // Update Method
+        private void UpdateUser(int staffId, string newStaffName)
         {
-            // Ensure we are not in Create Mode, as deletions should only occur in Update/Delete Mode
-            if (isCreateMode)
+            // Check if the user exists in MasterFile
+            if (MainWindow.MasterFile.ContainsKey(staffId))
             {
-                statusMessage.Content = "Invalid operation: Not in Delete Mode.";
-                return;
+                // Update the user's name in MasterFile (in-memory only)
+                MainWindow.MasterFile[staffId] = newStaffName;
+
+                // Display a success message
+                MessageBox.Show("User updated successfully (in-memory only).", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-            // Confirm deletion
-            var result = MessageBox.Show("Are you sure you want to delete this staff member?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.Yes)
+            else
             {
-                // Check if the Staff ID exists in MasterFile and remove it
-                if (MainWindow.MasterFile.Remove(staffId))
+                MessageBox.Show("Error: Staff ID not found in MasterFile.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateStaff(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(txtAdminStaffID.Text, out int staffId))
+            {
+                string newStaffName = txtAdminStaffName.Text.Trim();
+                if (!string.IsNullOrEmpty(newStaffName))
                 {
-                    // Clear the text fields
-                    txtAdminStaffID.Clear();
-                    txtAdminStaffName.Clear();
-                    statusMessage.Content = "Staff deleted successfully.";
+                    UpdateUser(staffId, newStaffName);
                 }
                 else
                 {
-                    statusMessage.Content = "Error: Staff ID not found.";
+                    MessageBox.Show("Please enter a valid Staff Name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                statusMessage.Content = "Deletion cancelled.";
+                MessageBox.Show("Invalid Staff ID entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteStaff(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(txtAdminStaffID.Text, out int staffId))
+            {
+                DeleteUser(staffId);
+            }
+            else
+            {
+                MessageBox.Show("Invalid Staff ID entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
