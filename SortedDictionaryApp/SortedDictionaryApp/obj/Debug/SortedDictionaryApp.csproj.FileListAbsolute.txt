@@ -1,0 +1,17 @@
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.csproj.AssemblyReference.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\MainWindow.g.cs
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\App.g.cs
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp_MarkupCompile.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp_MarkupCompile.lref
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\bin\Debug\SortedDictionaryApp.exe.config
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\bin\Debug\SortedDictionaryApp.exe
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\bin\Debug\SortedDictionaryApp.pdb
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\AdminWindow.g.cs
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\AdminWindow.baml
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\MainWindow.baml
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.g.resources
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.Properties.Resources.resources
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.csproj.GenerateResource.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.csproj.CoreCompileInputs.cache
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.exe
+C:\Users\BrumertzTafe\Desktop\MSSS_Dictionary\SortedDictionaryApp\SortedDictionaryApp\obj\Debug\SortedDictionaryApp.pdb
