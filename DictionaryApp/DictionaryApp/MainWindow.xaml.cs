@@ -28,6 +28,7 @@ namespace DictionaryApp
         public static RoutedUICommand OpenAdminCommand = new RoutedUICommand("Open Admin", "OpenAdminCommand", typeof(MainWindow));
         public static RoutedCommand ClearStaffIDFilterCommand = new RoutedCommand();
         public static RoutedCommand ClearStaffNameFilterCommand = new RoutedCommand();
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace DictionaryApp
             DisplayData();
             CommandBindings.Add(new CommandBinding(ClearStaffNameFilterCommand, ClearAndFocusStaffNameFilter));
             CommandBindings.Add(new CommandBinding(ClearStaffIDFilterCommand, ClearAndFocusStaffIDFilter));
-
+            CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminGui));
         }
         private void LoadDataFromCsv(string filePath)
         {
@@ -116,9 +117,43 @@ namespace DictionaryApp
                     txtSelectedStaffName.Text = parts[1].Trim();
                 }
             }
+        }// Method to open the Admin GUI with Alt + A
+        private void OpenAdminGui(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (listBoxFilteredResults.SelectedItem != null)
+            {
+                // Retrieve the selected Staff ID and Name from listBoxFilteredResults
+                string selectedText = listBoxFilteredResults.SelectedItem.ToString();
+                var parts = selectedText.Split(new[] { " - " }, StringSplitOptions.None);
+
+                if (parts.Length == 2 && int.TryParse(parts[0], out int staffId))
+                {
+                    string staffName = parts[1].Trim();
+
+                    // Check if we need to open in "Create Mode" for new user
+                    if (staffId == 77 && string.IsNullOrEmpty(staffName))
+                    {
+                        // Open AdminWindow in Create Mode (e.g., pass special parameter or set a flag)
+                        AdminWindow adminWindow = new AdminWindow(true); // Passing true for "Create Mode"
+                        adminWindow.ShowDialog();
+                    }
+                    else
+                    {
+                        // Open AdminWindow in Update/Delete Mode
+                        AdminWindow adminWindow = new AdminWindow(staffId, staffName);
+                        adminWindow.ShowDialog();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a record to edit or leave Staff ID as 77 and Staff Name empty to create a new entry.",
+                    "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
-    } 
-}
+    }
+} 
+
 
 
 

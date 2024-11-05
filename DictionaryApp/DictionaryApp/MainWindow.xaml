@@ -30,5 +30,7 @@
     <Window.InputBindings>
         <KeyBinding Command="{x:Static local:MainWindow.ClearStaffNameFilterCommand}" Key="N" Modifiers="Control"/>
         <KeyBinding Command="{x:Static local:MainWindow.ClearStaffIDFilterCommand}" Key="I" Modifiers="Control"/>
+        <KeyBinding Command="{x:Static local:MainWindow.OpenAdminCommand}" Key="A" Modifiers="Alt"/>
+
     </Window.InputBindings>
 </Window>
