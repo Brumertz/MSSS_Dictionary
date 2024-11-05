@@ -94,6 +94,57 @@ namespace DictionaryApp
             this.Close(); // Close the window after successful creation
         }
 
+        
+
+        // Update Method
+        private void UpdateUser(int staffId, string newStaffName)
+        {
+            // Check if the user exists in MasterFile
+            if (MainWindow.MasterFile.ContainsKey(staffId))
+            {
+                // Update the user's name in MasterFile (in-memory only)
+                MainWindow.MasterFile[staffId] = newStaffName;
+
+                // Display a success message
+                MessageBox.Show("User updated successfully (in-memory only).", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error: Staff ID not found in MasterFile.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateStaff(object sender, RoutedEventArgs e)
+        {
+            // Parse Staff ID from the text box
+            if (int.TryParse(txtAdminStaffID.Text, out int staffId))
+            {
+                // Trim and validate the new Staff Name
+                string newStaffName = txtAdminStaffName.Text.Trim();
+                if (!string.IsNullOrEmpty(newStaffName))
+                {
+                    // Update user in MasterFile
+                    UpdateUser(staffId, newStaffName);
+
+                    // Refresh the ListBox in MainWindow to reflect changes
+                    ((MainWindow)Application.Current.MainWindow).RefreshListBox();
+
+                    // Close the AdminWindow after updating
+                    this.Close();
+                }
+                else
+                {
+                    // Show an error if the Staff Name is invalid
+                    MessageBox.Show("Please enter a valid Staff Name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                // Show an error if the Staff ID is invalid
+                MessageBox.Show("Invalid Staff ID entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        
         // Delete User Method
         private void DeleteUser(int staffId)
         {
@@ -116,52 +167,23 @@ namespace DictionaryApp
             }
         }
 
-        // Update Method
-        private void UpdateUser(int staffId, string newStaffName)
-        {
-            // Check if the user exists in MasterFile
-            if (MainWindow.MasterFile.ContainsKey(staffId))
-            {
-                // Update the user's name in MasterFile (in-memory only)
-                MainWindow.MasterFile[staffId] = newStaffName;
-
-                // Display a success message
-                MessageBox.Show("User updated successfully (in-memory only).", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Error: Staff ID not found in MasterFile.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void UpdateStaff(object sender, RoutedEventArgs e)
-        {
-            if (int.TryParse(txtAdminStaffID.Text, out int staffId))
-            {
-                string newStaffName = txtAdminStaffName.Text.Trim();
-                if (!string.IsNullOrEmpty(newStaffName))
-                {
-                    UpdateUser(staffId, newStaffName);
-                }
-                else
-                {
-                    MessageBox.Show("Please enter a valid Staff Name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Invalid Staff ID entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private void DeleteStaff(object sender, RoutedEventArgs e)
         {
+            // Parse Staff ID from the text box
             if (int.TryParse(txtAdminStaffID.Text, out int staffId))
             {
+                // Call DeleteUser to remove the staff member from MasterFile
                 DeleteUser(staffId);
+
+                // Refresh the ListBox in MainWindow to reflect changes
+                ((MainWindow)Application.Current.MainWindow).RefreshListBox();
+
+                // Close the AdminWindow after deletion
+                this.Close();
             }
             else
             {
+                // Show an error if the Staff ID is invalid
                 MessageBox.Show("Invalid Staff ID entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

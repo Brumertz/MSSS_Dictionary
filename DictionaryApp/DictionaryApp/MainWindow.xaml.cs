@@ -194,6 +194,13 @@ namespace DictionaryApp
                 }
             }
         }
+        public void RefreshListBox()
+        {
+            // Convert MasterFile to a list format suitable for display
+            listBoxFilteredResults.ItemsSource = MainWindow.MasterFile
+                .Select(item => $"{item.Key} - {item.Value}")
+                .ToList();
+        }
     }
 } 
 
